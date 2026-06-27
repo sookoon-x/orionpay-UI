@@ -2,18 +2,44 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Theme variables for light, dark, and multi-color modes */
 :root {
+  /* Light mode */
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  --toast-bg: #ffffff;
+  --toast-text: #1f2937;
+  --toast-success: #10b981;
+  --toast-error: #ef4444;
+  --toast-info: #3b82f6;
+  --toast-loading: #f59e0b;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+/* Dark mode */
+.dark {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 17, 24, 39;
+  --background-end-rgb: 0, 0, 0;
+  --toast-bg: #1f2937;
+  --toast-text: #f9fafb;
+  --toast-success: #34d399;
+  --toast-error: #f87171;
+  --toast-info: #60a5fa;
+  --toast-loading: #fbbf24;
+}
+
+/* Multi-color theme */
+.multi-color {
+  --foreground-rgb: 31, 41, 55;
+  --background-start-rgb: 249, 250, 251;
+  --background-end-rgb: 243, 244, 246;
+  --toast-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --toast-text: #ffffff;
+  --toast-success: #10b981;
+  --toast-error: #ef4444;
+  --toast-info: #3b82f6;
+  --toast-loading: #f59e0b;
 }
 
 body {
@@ -24,4 +50,26 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Theme transitions for all elements */
+* {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+/* Toast theme classes */
+.toast-light {
+  background: var(--toast-bg) !important;
+  color: var(--toast-text) !important;
+}
+
+.toast-dark {
+  background: var(--toast-bg) !important;
+  color: var(--toast-text) !important;
+}
+
+.toast-multi-color {
+  background: var(--toast-bg) !important;
+  color: var(--toast-text) !important;
 }
