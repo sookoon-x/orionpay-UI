@@ -1,10 +1,14 @@
 'use client';
 
 import { useTheme } from '@/src/contexts/ThemeContext';
+import { useAppSelector, useAppDispatch } from '@/src/hooks/redux';
+import { selectCount, increment, decrement, reset } from '@/src/store/slices/counterSlice';
 import { toastSuccess, toastError, toastInfo, toastLoading, toastPromise, toastDismiss } from '@/src/utils/toast';
 
 export default function Home() {
   const { theme, setTheme } = useTheme();
+  const count = useAppSelector(selectCount);
+  const dispatch = useAppDispatch();
 
   const handleSuccessToast = () => {
     toastSuccess('Operation completed successfully!');
@@ -142,6 +146,36 @@ export default function Home() {
           </button>
         </div>
         <p className="text-center mt-4 text-sm opacity-70">Click any button to test the toast notification system</p>
+      </div>
+
+      {/* Redux Counter Demo */}
+      <div className="bg-white/80 dark:bg-gray-800/80 multi-color:bg-white/20 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-gray-200 dark:border-gray-700">
+        <h2 className="text-2xl font-bold mb-4 text-center">Redux Toolkit Counter Demo</h2>
+        <div className="text-center mb-6">
+          <span className="text-6xl font-bold">{count}</span>
+          <p className="text-sm opacity-70 mt-2">Current counter value (from Redux store)</p>
+        </div>
+        <div className="flex flex-wrap gap-4 justify-center">
+          <button
+            onClick={() => dispatch(decrement())}
+            className="px-6 py-3 bg-red-500 text-white rounded-lg font-semibold hover:bg-red-600 transition-colors shadow-md"
+          >
+            ➖ Decrement
+          </button>
+          <button
+            onClick={() => dispatch(reset())}
+            className="px-6 py-3 bg-gray-500 text-white rounded-lg font-semibold hover:bg-gray-600 transition-colors shadow-md"
+          >
+            🔄 Reset
+          </button>
+          <button
+            onClick={() => dispatch(increment())}
+            className="px-6 py-3 bg-green-500 text-white rounded-lg font-semibold hover:bg-green-600 transition-colors shadow-md"
+          >
+            ➕ Increment
+          </button>
+        </div>
+        <p className="text-center mt-4 text-sm opacity-70">Redux DevTools will track all these state changes in your browser!</p>
       </div>
 
       <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
