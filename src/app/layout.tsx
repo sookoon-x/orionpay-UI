@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 import { ThemeProvider } from "@/src/contexts/ThemeContext";
 import { ReduxProvider } from "@/src/store/ReduxProvider";
+import Header from "@/src/components/layout/Header";
+import Footer from "@/src/components/layout/Footer";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -22,7 +24,11 @@ export default function RootLayout({
       <body className={inter.className}>
         <ReduxProvider>
           <ThemeProvider>
-            {children}
+            <Header />
+            <main className="pt-16">
+              {children}
+            </main>
+            <Footer />
             <Toaster
           position="top-right"
           reverseOrder={false}
